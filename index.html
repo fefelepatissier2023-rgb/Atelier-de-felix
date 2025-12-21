@@ -7,7 +7,24 @@
 
   <style>
    
-   .logo {
+   <style>
+  .galerie {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+  .galerie img {
+    width: 250px; /* Taille fixe pour toutes les photos */
+    height: 200px;
+    object-fit: cover; /* Coupe l'image proprement pour qu'elles fassent toutes la même taille */
+    border-radius: 10px; /* Bords arrondis pour le style */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Petite ombre portée */
+  }
+</style>
+  
+  .logo {
      display: block;
      margin: 0 auto 20px auto;
      max-width: 160px;
