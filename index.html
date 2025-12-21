@@ -9,16 +9,24 @@
 
   <style>
     body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #fff5f7; color: #5d4037; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+    
+    /* Section des photos de gâteaux */
     .conteneur-patisserie { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 30px; }
     .carte-photo { width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #f8bbd0; background-color: #eee; }
     .carte-photo img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* Photo du milieu cadrée vers le haut */
+    /* Recadrage vers le haut pour la photo du milieu */
     .photo-milieu img { object-position: top; }
 
+    /* Style du logo */
     .logo-container { text-align: center; margin-bottom: 10px; }
-    .logo-img { max-width: 180px; height: auto; mix-blend-mode: multiply; }
+    .logo-img { 
+      max-width: 180px; 
+      height: auto; 
+      mix-blend-mode: multiply; /* Aide à rendre le fond blanc invisible */
+    }
 
+    /* Style du formulaire */
     .container-formulaire { background: white; padding: 25px; border-radius: 20px; width: 100%; max-width: 450px; border: 1px solid #f8bbd0; box-shadow: 0 10px 25px rgba(248, 187, 208, 0.4); }
     h1 { text-align: center; color: #ad1457; margin: 0 0 15px 0; font-size: 22px; }
     .note-paiement { background-color: #fce4ec; padding: 12px; border-radius: 8px; font-size: 13px; text-align: center; margin-bottom: 20px; border-left: 4px solid #ad1457; line-height: 1.4; }
@@ -49,44 +57,46 @@
 
   <div class="container-formulaire">
     <h1>COMMANDE</h1>
-    <p class="note-paiement">🍰 <strong>On goûte d'abord, on paie après !</strong></p>
-
-    <form action="https://api.web3forms.com/submit" method="POST">
-    <input type="hidden" name="access_key" value="c9a987bb-1204-458f-a6bc-24bcd8b673df">
     
-    <label>Nom & Prénom</label>
-    <input type="text" name="nom" required>
+    <p class="note-paiement">
+      🍰 <strong>On goûte d'abord, on paie après !</strong><br>
+      Fixez votre prix après dégustation.
+    </p>
 
-    <div class="ligne-adresse">
-      <div><label>Email</label><input type="email" name="email" required></div>
-      <div><label>Téléphone</label><input type="tel" name="tel" required></div>
-    </div>
+    <form action="https://formspree.io/f/mjgbrnlz" method="POST">
+      <label>Nom & Prénom</label>
+      <input type="text" name="nom" required>
 
-    <label>Adresse (Rue)</label>
-    <input type="text" name="rue" required>
+      <div class="ligne-adresse">
+        <div><label>Email</label><input type="email" name="email" required></div>
+        <div><label>Téléphone</label><input type="tel" name="tel" required></div>
+      </div>
 
-    <div class="ligne-adresse">
-      <div><label>Code Postal</label><input type="text" name="cp" required></div>
-      <div><label>Ville</label><input type="text" name="ville" required></div>
-    </div>
+      <label>Adresse (Rue)</label>
+      <input type="text" name="rue" required>
 
-    <label>Date souhaitée</label>
-    <input type="date" name="date" required>
+      <div class="ligne-adresse">
+        <div><label>Code Postal</label><input type="text" name="cp" required></div>
+        <div><label>Ville</label><input type="text" name="ville" required></div>
+      </div>
 
-    <label>Gâteau choisi</label>
-    <input type="text" name="gateau" placeholder="Ex: Fraisier..." required>
+      <label>Date souhaitée</label>
+      <input type="date" name="date" required>
 
-    <label>Préférences / Messages</label>
-    <textarea name="message" rows="3"></textarea>
+      <label>Gâteau choisi</label>
+      <input type="text" name="gateau" placeholder="Quel délice vous tente ?" required>
 
-    <div class="captcha-box">
-      <input type="checkbox" id="robot" required> 
-      <label style="display:inline;" for="robot">Je suis un vrai gourmand 🍰</label>
-    </div>
+      <label>Messages pour le pâtissier</label>
+      <textarea name="message" rows="3"></textarea>
 
-    <button type="submit">Valider ma commande</button>
-</form>
-</div>
+      <div class="captcha-box">
+        <input type="checkbox" id="robot" required> 
+        <label style="display:inline;" for="robot">Je suis un vrai gourmand 🍰</label>
+      </div>
+
+      <button type="submit">Valider ma commande</button>
+    </form>
+  </div>
 
 </body>
 </html>
