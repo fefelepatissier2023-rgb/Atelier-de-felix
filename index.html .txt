@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>L’Atelier de Félix – Commande</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+   
+   .logo {
+     display: block;
+     margin: 0 auto 20px auto;
+     max-width: 160px;
+}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #2b2b2b, #000);
+      color: #f5e6b3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    p {
+      text-align: center;
+      font-size: 14px;
+      color: #d4af37;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 18px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #d4af37, #f5e6b3);
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 12px;
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+   <img src="logo.png" alt="Logo L'Atelier de Félix" class="logo">
+
+  <h1>L’ATELIER DE FÉLIX</h1>
+  <p>Commande de gâteaux</p>
+
+  <div class="container">
+    <h1>L’ATELIER DE FÉLIX</h1>
+    <p>Commande de gâteaux</p>
+
+    <form id="orderForm">
+      <label>Date souhaitée</label>
+      <input type="date" required>
+
+      <label>Numéro de téléphone</label>
+      <input type="tel" placeholder="06…" required>
+
+      <label>Email</label>
+      <input type="email" placeholder="email@example.com" required>
+
+      <label>Choix du gâteau</label>
+      <select required>
+        <option value="">-- Sélectionner --</option>
+        <option>Entremets chocolat</option>
+        <option>Fraisier</option>
+        <option>Tarte aux fruits</option>
+        <option>Number cake</option>
+        <option>Gâteau sur mesure</option>
+      </select>
+
+      <label>Préférences / précisions</label>
+      <textarea placeholder="Allergies, message sur le gâteau, saveur particulière…"></textarea>
+
+      <button type="submit">Commander</button>
+    </form>
+
+    <div class="footer">
+      © L’Atelier de Félix
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Commande envoyée. L’Atelier de Félix te recontacte rapidement.");
+      this.reset();
+    });
+  </script>
+
+<script src="script.js"></script>
+</body>
+</html>
