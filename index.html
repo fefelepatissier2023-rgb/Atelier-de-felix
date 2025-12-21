@@ -22,6 +22,9 @@
     label { display: block; margin-top: 15px; font-weight: bold; color: #ad1457; font-size: 14px; }
     input, textarea, select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; margin-top: 5px; font-family: inherit; font-size: 14px; }
     
+    .ligne-adresse { display: flex; gap: 10px; }
+    .ligne-adresse div { flex: 1; }
+
     #zone-signature, #zone-autre { 
       display: none; 
       background: #fffbf0; 
@@ -56,9 +59,17 @@
       <label>Nom & Prénom</label>
       <input type="text" name="nom" required>
 
-      <div style="display: flex; gap: 10px;">
-        <div style="flex: 1;"><label>Email</label><input type="email" name="email" required></div>
-        <div style="flex: 1;"><label>Téléphone</label><input type="tel" name="tel" required></div>
+      <div class="ligne-adresse">
+        <div><label>Email</label><input type="email" name="email" required></div>
+        <div><label>Téléphone</label><input type="tel" name="tel" required></div>
+      </div>
+
+      <label>Adresse (Rue)</label>
+      <input type="text" name="rue" required>
+
+      <div class="ligne-adresse">
+        <div><label>Code Postal</label><input type="text" name="cp" required></div>
+        <div><label>Ville</label><input type="text" name="ville" required></div>
       </div>
 
       <label>Sélectionnez votre pâtisserie</label>
@@ -93,15 +104,8 @@
       <label>Date souhaitée</label>
       <input type="date" name="date" required>
 
-      <label>Préférences de sucre</label>
-      <select name="preferences_sucre">
-        <option value="Standard">Recette originale</option>
-        <option value="Moins de sucre">Léger en sucre</option>
-        <option value="Gourmand">Bien gourmand !</option>
-      </select>
-
-      <label>Précisions (Anniversaire, allergies...)</label>
-      <textarea name="message" rows="3"></textarea>
+      <label>Précisions & Messages</label>
+      <textarea name="message" rows="3" placeholder="Ex: Moins de sucre, Anniversaire, Allergies..."></textarea>
 
       <button type="submit">Valider ma commande 🍰</button>
     </form>
