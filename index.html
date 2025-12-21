@@ -7,11 +7,11 @@
   <style>
     body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #fff5f7; color: #5d4037; display: flex; flex-direction: column; align-items: center; padding: 20px; }
     .conteneur-patisserie { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 30px; }
-    .carte-photo { width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #f8bbd0; background-color: #eee; }
+    .carte-photo { width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #f8bbd0; background-color: #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
     .carte-photo img { width: 100%; height: 100%; object-fit: cover; }
     
     .logo-container { text-align: center; margin-bottom: 10px; }
-    .logo-img { max-width: 180px; height: auto; }
+    .logo-img { max-width: 180px; height: auto; border-radius: 10px; }
 
     .container-formulaire { background: white; padding: 25px; border-radius: 20px; width: 100%; max-width: 450px; border: 1px solid #f8bbd0; box-shadow: 0 10px 25px rgba(248, 187, 208, 0.4); }
     h1 { text-align: center; color: #ad1457; margin: 0 0 15px 0; font-size: 22px; }
@@ -20,7 +20,6 @@
     label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 13px; margin-top: 12px; color: #ad1457; }
     input, textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; font-size: 14px; background: #fff; }
     
-    /* Pour mettre Code Postal et Ville sur la même ligne */
     .ligne-adresse { display: flex; gap: 10px; }
     .ligne-adresse div { flex: 1; }
 
@@ -31,54 +30,54 @@
 <body>
 
   <div class="conteneur-patisserie">
-    <div class="carte-photo"><img src="0A2033D6-3EB9-4A15-9187-1322E56DE8C6.jpeg" alt="Gâteau 1"></div>
-    <div class="carte-photo"><img src="7B8A818C-E3DD-4AA9-B4C3-F555C8444475.jpeg" alt="Gâteau 2"></div>
-    </div>
+    <div class="carte-photo"><img src="7B8A818C-E3DD-4AA9-B4C3-F555C8444475.jpeg" alt="Gâteau 1"></div>
+    <div class="carte-photo"><img src="B52597EF-AAD8-456E-997D-98EF5EF39A12.jpg" alt="Gâteau 2"></div>
+    <div class="carte-photo"><img src="CDEC8BF6-99F0-46D7-AE0D-A82B147EBC3E.jpg" alt="Gâteau 3"></div>
+  </div>
 
   <div class="logo-container">
-     <img src="logo.png" alt="Logo" class="logo-img">
+     <img src="logo.png" alt="Logo L'Atelier de Félix" class="logo-img">
   </div>
 
   <div class="container-formulaire">
     <h1>COMMANDE</h1>
     
     <p class="note-paiement">
-      🍰 <strong>Plaisir garanti :</strong> On goûte d'abord, on paie après !<br>
-      (Vous fixez le prix selon votre plaisir après dégustation)
+      🍰 <strong>On goûte d'abord, on paie après !</strong><br>
+      Vous fixez le prix selon votre plaisir après dégustation.
     </p>
 
-    <form action="https://formspree.io/f/mjgbrnlz" method="POST">
+    <form action="https://formspree.io/f/VOTRE_ID" method="POST">
       
       <label>Nom & Prénom</label>
       <input type="text" name="nom" required>
 
-      <label>Email & Téléphone</label>
       <div class="ligne-adresse">
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="tel" name="tel" placeholder="Téléphone" required>
+        <div>
+          <label>Email</label>
+          <input type="email" name="email" required>
+        </div>
+        <div>
+          <label>Téléphone</label>
+          <input type="tel" name="tel" required>
+        </div>
       </div>
 
-      <label>Adresse de livraison (Rue)</label>
-      <input type="text" name="rue" placeholder="12 rue des Délices" required>
+      <label>Adresse (Rue)</label>
+      <input type="text" name="rue" required>
 
       <div class="ligne-adresse">
-        <div>
-          <label>Code Postal</label>
-          <input type="text" name="cp" placeholder="75000" required>
-        </div>
-        <div>
-          <label>Ville</label>
-          <input type="text" name="ville" placeholder="Paris" required>
-        </div>
+        <div><label>Code Postal</label><input type="text" name="cp" required></div>
+        <div><label>Ville</label><input type="text" name="ville" required></div>
       </div>
 
       <label>Date souhaitée</label>
       <input type="date" name="date" required>
 
-      <label>Quel gâteau vous fait envie ?</label>
-      <input type="text" name="gateau" placeholder="Ex: Fraisier, Éclair..." required>
+      <label>Gâteau choisi</label>
+      <input type="text" name="gateau" placeholder="Ex: Fraisier..." required>
 
-      <label>Précisions (Allergies, message...)</label>
+      <label>Préférences / Messages</label>
       <textarea name="message" rows="3"></textarea>
 
       <div class="captcha-box">
