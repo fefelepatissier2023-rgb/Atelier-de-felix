@@ -25,7 +25,8 @@
     .ligne-adresse { display: flex; gap: 10px; }
     .ligne-adresse div { flex: 1; }
 
-    #zone-signature, #zone-autre { 
+    /* Zones cachées par défaut */
+    #zone-signature, #zone-autre, #zone-livraison-details { 
       display: none; 
       background: #fffbf0; 
       padding: 15px; 
@@ -37,9 +38,8 @@
     .description-signature { font-size: 13px; color: #5d4037; line-height: 1.5; margin-bottom: 15px; background: white; padding: 10px; border-radius: 5px; border: 1px solid #fce4ec; }
     .titre-signature { color: #ad1457; font-weight: bold; display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 12px; }
 
-    .checkbox-container { background: #f9f9f9; padding: 15px; border-radius: 10px; margin-top: 20px; border: 1px solid #eee; display: flex; align-items: center; gap: 10px; }
+    .checkbox-container { background: #f9f9f9; padding: 15px; border-radius: 10px; margin-top: 20px; border: 1px solid #eee; display: flex; align-items: center; gap: 10px; cursor: pointer; }
     .checkbox-container input { width: auto; margin-top: 0; cursor: pointer; }
-    .checkbox-container label { margin-top: 0; cursor: pointer; color: #5d4037; }
 
     .rappel-prix { font-size: 12px; color: #ad1457; text-align: center; margin-top: 15px; font-style: italic; font-weight: bold; }
 
@@ -70,14 +70,6 @@
         <div><label>Téléphone</label><input type="tel" name="tel" required></div>
       </div>
 
-      <label>Adresse de livraison (Rue)</label>
-      <input type="text" name="rue" required>
-
-      <div class="ligne-adresse">
-        <div><label>Code Postal</label><input type="text" name="cp" required></div>
-        <div><label>Ville</label><input type="text" name="ville" required></div>
-      </div>
-
       <label>Sélectionnez votre pâtisserie</label>
       <select name="gateau" id="choixGateau" onchange="verifierChoix()" required>
         <option value="" disabled selected>-- Faites votre choix --</option>
@@ -89,6 +81,16 @@
         <option value="Fraisier">Fraisier</option>
         <option value="Signature">✨ LE SIGNATURE (Personnalisable)</option>
         <option value="Autre">Autre gâteau...</option>
+      </select>
+
+      <label>Nombre de parts</label>
+      <select name="nombre_parts" required>
+        <option value="Individuel">Individuel</option>
+        <option value="4 personnes">4 personnes</option>
+        <option value="6 personnes">6 personnes</option>
+        <option value="8 personnes">8 personnes</option>
+        <option value="10 personnes">10 personnes</option>
+        <option value="Grand format (12+)">Plus de 12 personnes</option>
       </select>
 
       <div id="zone-signature">
@@ -111,11 +113,24 @@
       <input type="date" name="date" required>
 
       <label>Précisions (Anniversaire, allergies, moins de sucre...)</label>
-      <textarea name="message" rows="3"></textarea>
+      <textarea name="message" rows="2"></textarea>
 
-      <div class="checkbox-container">
-        <input type="checkbox" id="livraison" name="demande_livraison" value="Oui">
+      <div class="checkbox-container" onclick="document.getElementById('livraison').click();">
+        <input type="checkbox" id="livraison" name="demande_livraison" value="Oui" onchange="verifierLivraison(this)">
         <label for="livraison">🚗 Je souhaite être livré à domicile</label>
+      </div>
+
+      <div id="zone-livraison-details">
+        <label>Adresse complète (Rue)</label>
+        <input type="text" name="rue_livraison" placeholder="N° et nom de la rue">
+        
+        <div class="ligne-adresse">
+          <div><label>Code Postal</label><input type="text" name="cp_livraison"></div>
+          <div><label>Ville</label><input type="text" name="ville_livraison"></div>
+        </div>
+
+        <label>Heure de livraison souhaitée</label>
+        <input type="time" name="heure_livraison">
       </div>
 
       <p class="rappel-prix">Le prix sera fixé librement par vos soins après réception et dégustation du gâteau. ✅</p>
@@ -125,21 +140,20 @@
   </div>
 
   <script>
+    // Gère l'affichage des options de gâteaux
     function verifierChoix() {
       var selection = document.getElementById("choixGateau").value;
       var zoneSignature = document.getElementById("zone-signature");
       var zoneAutre = document.getElementById("zone-autre");
 
-      if (selection === "Signature") {
-        zoneSignature.style.display = "block";
-        zoneAutre.style.display = "none";
-      } else if (selection === "Autre") {
-        zoneAutre.style.display = "block";
-        zoneSignature.style.display = "none";
-      } else {
-        zoneSignature.style.display = "none";
-        zoneAutre.style.display = "none";
-      }
+      zoneSignature.style.display = (selection === "Signature") ? "block" : "none";
+      zoneAutre.style.display = (selection === "Autre") ? "block" : "none";
+    }
+
+    // Gère l'affichage des champs d'adresse et d'heure
+    function verifierLivraison(checkbox) {
+      var zoneDetails = document.getElementById("zone-livraison-details");
+      zoneDetails.style.display = (checkbox.checked) ? "block" : "none";
     }
   </script>
 
