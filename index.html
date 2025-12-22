@@ -25,7 +25,8 @@
     .ligne-adresse { display: flex; gap: 10px; }
     .ligne-adresse div { flex: 1; }
 
-    #zone-signature, #zone-autre, #zone-livraison-details { 
+    /* Zones interactives */
+    #zone-signature, #zone-autre, #zone-livraison-details, #zone-autre-parts { 
       display: none; 
       background: #fffbf0; 
       padding: 15px; 
@@ -37,7 +38,6 @@
     .description-signature { font-size: 13px; color: #5d4037; line-height: 1.5; margin-bottom: 15px; background: white; padding: 10px; border-radius: 5px; border: 1px solid #fce4ec; }
     .titre-signature { color: #ad1457; font-weight: bold; display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 12px; }
 
-    /* Style de la case livraison corrigé */
     .checkbox-container { background: #f9f9f9; padding: 15px; border-radius: 10px; margin-top: 20px; border: 1px solid #eee; display: flex; align-items: center; gap: 10px; }
     .checkbox-container input[type="checkbox"] { width: 20px; height: 20px; margin: 0; cursor: pointer; }
     .checkbox-container label { margin: 0; cursor: pointer; flex: 1; color: #5d4037; }
@@ -85,14 +85,21 @@
       </select>
 
       <label>Nombre de parts</label>
-      <select name="nombre_parts" required>
-        <option value="Individuel">Individuel</option>
-        <option value="4 personnes">4 personnes</option>
-        <option value="6 personnes">6 personnes</option>
-        <option value="8 personnes">8 personnes</option>
-        <option value="10 personnes">10 personnes</option>
-        <option value="12+ personnes">12 personnes et +</option>
+      <select name="nombre_parts" id="choixParts" onchange="verifierParts()" required>
+        <option value="2">2 parts</option>
+        <option value="3">3 parts</option>
+        <option value="4">4 parts</option>
+        <option value="5">5 parts</option>
+        <option value="6">6 parts</option>
+        <option value="7">7 parts</option>
+        <option value="8">8 parts</option>
+        <option value="Autre">Autre nombre...</option>
       </select>
+
+      <div id="zone-autre-parts">
+        <label>Précisez le nombre de parts :</label>
+        <input type="number" name="precision_parts" min="1" placeholder="Ex: 12">
+      </div>
 
       <div id="zone-signature">
         <span class="titre-signature">La création Signature :</span>
@@ -143,6 +150,11 @@
       var selection = document.getElementById("choixGateau").value;
       document.getElementById("zone-signature").style.display = (selection === "Signature") ? "block" : "none";
       document.getElementById("zone-autre").style.display = (selection === "Autre") ? "block" : "none";
+    }
+
+    function verifierParts() {
+      var selectionParts = document.getElementById("choixParts").value;
+      document.getElementById("zone-autre-parts").style.display = (selectionParts === "Autre") ? "block" : "none";
     }
 
     function verifierLivraison() {
