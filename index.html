@@ -25,7 +25,6 @@
     .ligne-adresse { display: flex; gap: 10px; }
     .ligne-adresse div { flex: 1; }
 
-    /* Zones interactives cachées */
     #zone-signature, #zone-autre, #zone-livraison-details, #zone-autre-parts { 
       display: none; 
       background: #fffbf0; 
@@ -129,52 +128,55 @@
       <div id="zone-livraison-details">
         <label>Adresse de livraison (Rue)</label>
         <input type="text" name="rue_livraison" placeholder="N° et nom de la rue">
-        
+
+        <label>Appartement / Précisions</label>
+        <input type="text" name="appartement_details" placeholder="Bâtiment B, fond de la cour à droite, code porte...">
+
         <div class="ligne-adresse">
+          <div><label>Étage</label><input type="text" name="etage" placeholder="Ex: 4ème"></div>
           <div><label>Code Postal</label><input type="text" name="cp_livraison" placeholder="750XX"></div>
-          <div>
-            <label>Ville / Arrondissement</label>
-            <select name="ville_livraison">
-              <option value="" disabled selected>-- Choisir --</option>
-              <optgroup label="Paris">
-                <option value="Paris 1">Paris 1er</option>
-                <option value="Paris 2">Paris 2e</option>
-                <option value="Paris 3">Paris 3e</option>
-                <option value="Paris 4">Paris 4e</option>
-                <option value="Paris 5">Paris 5e</option>
-                <option value="Paris 6">Paris 6e</option>
-                <option value="Paris 7">Paris 7e</option>
-                <option value="Paris 8">Paris 8e</option>
-                <option value="Paris 9">Paris 9e</option>
-                <option value="Paris 10">Paris 10e</option>
-                <option value="Paris 11">Paris 11e</option>
-                <option value="Paris 12">Paris 12e</option>
-                <option value="Paris 13">Paris 13e</option>
-                <option value="Paris 14">Paris 14e</option>
-                <option value="Paris 15">Paris 15e</option>
-                <option value="Paris 16">Paris 16e</option>
-                <option value="Paris 17">Paris 17e</option>
-                <option value="Paris 18">Paris 18e</option>
-                <option value="Paris 19">Paris 19e</option>
-                <option value="Paris 20">Paris 20e</option>
-              </optgroup>
-              <optgroup label="Proche Banlieue">
-                <option value="Levallois-Perret">Levallois-Perret</option>
-                <option value="Clichy">Clichy</option>
-                <option value="Neuilly-sur-Seine">Neuilly-sur-Seine</option>
-                <option value="Asnières-sur-Seine">Asnières-sur-Seine</option>
-                <option value="Courbevoie">Courbevoie</option>
-                <option value="Saint-Ouen">Saint-Ouen</option>
-                <option value="Puteaux">Puteaux</option>
-                <option value="Colombes">Colombes</option>
-                <option value="La Garenne-Colombes">La Garenne-Colombes</option>
-                <option value="Bois-Colombes">Bois-Colombes</option>
-                <option value="Gennevilliers">Gennevilliers</option>
-                <option value="Nanterre">Nanterre</option>
-              </optgroup>
-            </select>
-          </div>
         </div>
+
+        <label>Ville / Arrondissement</label>
+        <select name="ville_livraison">
+          <option value="" disabled selected>-- Choisir --</option>
+          <optgroup label="Paris">
+            <option value="Paris 1">Paris 1er</option>
+            <option value="Paris 2">Paris 2e</option>
+            <option value="Paris 3">Paris 3e</option>
+            <option value="Paris 4">Paris 4e</option>
+            <option value="Paris 5">Paris 5e</option>
+            <option value="Paris 6">Paris 6e</option>
+            <option value="Paris 7">Paris 7e</option>
+            <option value="Paris 8">Paris 8e</option>
+            <option value="Paris 9">Paris 9e</option>
+            <option value="Paris 10">Paris 10e</option>
+            <option value="Paris 11">Paris 11e</option>
+            <option value="Paris 12">Paris 12e</option>
+            <option value="Paris 13">Paris 13e</option>
+            <option value="Paris 14">Paris 14e</option>
+            <option value="Paris 15">Paris 15e</option>
+            <option value="Paris 16">Paris 16e</option>
+            <option value="Paris 17">Paris 17e</option>
+            <option value="Paris 18">Paris 18e</option>
+            <option value="Paris 19">Paris 19e</option>
+            <option value="Paris 20">Paris 20e</option>
+          </optgroup>
+          <optgroup label="Proche Banlieue">
+            <option value="Levallois-Perret">Levallois-Perret</option>
+            <option value="Clichy">Clichy</option>
+            <option value="Neuilly-sur-Seine">Neuilly-sur-Seine</option>
+            <option value="Asnières-sur-Seine">Asnières-sur-Seine</option>
+            <option value="Courbevoie">Courbevoie</option>
+            <option value="Saint-Ouen">Saint-Ouen</option>
+            <option value="Puteaux">Puteaux</option>
+            <option value="Colombes">Colombes</option>
+            <option value="La Garenne-Colombes">La Garenne-Colombes</option>
+            <option value="Bois-Colombes">Bois-Colombes</option>
+            <option value="Gennevilliers">Gennevilliers</option>
+            <option value="Nanterre">Nanterre</option>
+          </optgroup>
+        </select>
 
         <label>Heure de livraison souhaitée</label>
         <input type="time" name="heure_livraison">
