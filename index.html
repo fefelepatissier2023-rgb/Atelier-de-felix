@@ -25,7 +25,6 @@
     .ligne-adresse { display: flex; gap: 10px; }
     .ligne-adresse div { flex: 1; }
 
-    /* Zones cachées par défaut */
     #zone-signature, #zone-autre, #zone-livraison-details { 
       display: none; 
       background: #fffbf0; 
@@ -38,8 +37,10 @@
     .description-signature { font-size: 13px; color: #5d4037; line-height: 1.5; margin-bottom: 15px; background: white; padding: 10px; border-radius: 5px; border: 1px solid #fce4ec; }
     .titre-signature { color: #ad1457; font-weight: bold; display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 12px; }
 
-    .checkbox-container { background: #f9f9f9; padding: 15px; border-radius: 10px; margin-top: 20px; border: 1px solid #eee; display: flex; align-items: center; gap: 10px; cursor: pointer; }
-    .checkbox-container input { width: auto; margin-top: 0; cursor: pointer; }
+    /* Style de la case livraison corrigé */
+    .checkbox-container { background: #f9f9f9; padding: 15px; border-radius: 10px; margin-top: 20px; border: 1px solid #eee; display: flex; align-items: center; gap: 10px; }
+    .checkbox-container input[type="checkbox"] { width: 20px; height: 20px; margin: 0; cursor: pointer; }
+    .checkbox-container label { margin: 0; cursor: pointer; flex: 1; color: #5d4037; }
 
     .rappel-prix { font-size: 12px; color: #ad1457; text-align: center; margin-top: 15px; font-style: italic; font-weight: bold; }
 
@@ -59,7 +60,7 @@
 
   <div class="container-formulaire">
     <h1>COMMANDE</h1>
-    <p class="note-paiement">🍰 <strong>Concept unique : On goûte d'abord, on paie après !</strong></p>
+    <p class="note-paiement">🍰 <strong>On goûte d'abord, on paie après !</strong></p>
 
     <form action="https://formspree.io/f/mjgbrnlz" method="POST">
       <label>Nom & Prénom</label>
@@ -90,23 +91,23 @@
         <option value="6 personnes">6 personnes</option>
         <option value="8 personnes">8 personnes</option>
         <option value="10 personnes">10 personnes</option>
-        <option value="Grand format (12+)">Plus de 12 personnes</option>
+        <option value="12+ personnes">12 personnes et +</option>
       </select>
 
       <div id="zone-signature">
         <span class="titre-signature">La création Signature :</span>
         <p class="description-signature">
-          Une pâtisserie unique <strong>en forme de tarte</strong> : une base de meringue craquante, une crème onctueuse, un biscuit moelleux et une chantilly pochée en fleur. Le tout est couronné d'une boule de chocolat surprise au <strong>cœur fondant</strong>.
+          Une pâtisserie unique <strong>en forme de tarte</strong> : base meringue, crème onctueuse, biscuit moelleux et chantilly en fleur. Couronné d'une boule chocolat au <strong>cœur fondant</strong>.
         </p>
         <label>Goût de la crème</label>
         <input type="text" name="signature_gout_1" placeholder="Ex: Vanille, Pistache...">
-        <label>Goût du cœur fondant (boule chocolat)</label>
+        <label>Goût du cœur fondant</label>
         <input type="text" name="signature_gout_2" placeholder="Ex: Caramel, Framboise...">
       </div>
 
       <div id="zone-autre">
         <label>Quel gâteau désirez-vous ?</label>
-        <input type="text" name="autre_gateau_nom" placeholder="Nom du gâteau ou description">
+        <input type="text" name="autre_gateau_nom">
       </div>
 
       <label>Date souhaitée</label>
@@ -115,45 +116,38 @@
       <label>Précisions (Anniversaire, allergies, moins de sucre...)</label>
       <textarea name="message" rows="2"></textarea>
 
-      <div class="checkbox-container" onclick="document.getElementById('livraison').click();">
-        <input type="checkbox" id="livraison" name="demande_livraison" value="Oui" onchange="verifierLivraison(this)">
+      <div class="checkbox-container">
+        <input type="checkbox" id="livraison" name="demande_livraison" value="Oui" onchange="verifierLivraison()">
         <label for="livraison">🚗 Je souhaite être livré à domicile</label>
       </div>
 
       <div id="zone-livraison-details">
-        <label>Adresse complète (Rue)</label>
+        <label>Adresse de livraison (Rue)</label>
         <input type="text" name="rue_livraison" placeholder="N° et nom de la rue">
-        
         <div class="ligne-adresse">
           <div><label>Code Postal</label><input type="text" name="cp_livraison"></div>
           <div><label>Ville</label><input type="text" name="ville_livraison"></div>
         </div>
-
         <label>Heure de livraison souhaitée</label>
         <input type="time" name="heure_livraison">
       </div>
 
-      <p class="rappel-prix">Le prix sera fixé librement par vos soins après réception et dégustation du gâteau. ✅</p>
+      <p class="rappel-prix">Le prix sera décidé après réception et dégustation du gâteau. ✅</p>
 
       <button type="submit">Valider ma commande 🍰</button>
     </form>
   </div>
 
   <script>
-    // Gère l'affichage des options de gâteaux
     function verifierChoix() {
       var selection = document.getElementById("choixGateau").value;
-      var zoneSignature = document.getElementById("zone-signature");
-      var zoneAutre = document.getElementById("zone-autre");
-
-      zoneSignature.style.display = (selection === "Signature") ? "block" : "none";
-      zoneAutre.style.display = (selection === "Autre") ? "block" : "none";
+      document.getElementById("zone-signature").style.display = (selection === "Signature") ? "block" : "none";
+      document.getElementById("zone-autre").style.display = (selection === "Autre") ? "block" : "none";
     }
 
-    // Gère l'affichage des champs d'adresse et d'heure
-    function verifierLivraison(checkbox) {
-      var zoneDetails = document.getElementById("zone-livraison-details");
-      zoneDetails.style.display = (checkbox.checked) ? "block" : "none";
+    function verifierLivraison() {
+      var isChecked = document.getElementById("livraison").checked;
+      document.getElementById("zone-livraison-details").style.display = isChecked ? "block" : "none";
     }
   </script>
 
