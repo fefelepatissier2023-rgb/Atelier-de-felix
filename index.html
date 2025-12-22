@@ -9,7 +9,7 @@
   <style>
     body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #fff5f7; color: #5d4037; display: flex; flex-direction: column; align-items: center; padding: 20px; }
     .conteneur-patisserie { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 30px; }
-    .carte-photo { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 4px solid #f8bbd0; }
+    .carte-photo { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 4px solid #f8bbd0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
     .carte-photo img { width: 100%; height: 100%; object-fit: cover; }
     .photo-milieu img { object-position: top; }
     
@@ -25,7 +25,7 @@
     .ligne-adresse { display: flex; gap: 10px; }
     .ligne-adresse div { flex: 1; }
 
-    /* Zones interactives */
+    /* Zones interactives cachées */
     #zone-signature, #zone-autre, #zone-livraison-details, #zone-autre-parts { 
       display: none; 
       background: #fffbf0; 
@@ -103,9 +103,7 @@
 
       <div id="zone-signature">
         <span class="titre-signature">La création Signature :</span>
-        <p class="description-signature">
-          Une pâtisserie unique <strong>en forme de tarte</strong> : base meringue, crème onctueuse, biscuit moelleux et chantilly en fleur. Couronné d'une boule chocolat au <strong>cœur fondant</strong>.
-        </p>
+        <p class="description-signature">Une pâtisserie unique : base meringue, crème onctueuse, biscuit moelleux et chantilly en fleur. Couronné d'une boule chocolat au cœur fondant.</p>
         <label>Goût de la crème</label>
         <input type="text" name="signature_gout_1" placeholder="Ex: Vanille, Pistache...">
         <label>Goût du cœur fondant</label>
@@ -133,25 +131,47 @@
         <input type="text" name="rue_livraison" placeholder="N° et nom de la rue">
         
         <div class="ligne-adresse">
-          <div><label>Code Postal</label><input type="text" name="cp_livraison"></div>
+          <div><label>Code Postal</label><input type="text" name="cp_livraison" placeholder="750XX"></div>
           <div>
-            <label>Ville</label>
+            <label>Ville / Arrondissement</label>
             <select name="ville_livraison">
               <option value="" disabled selected>-- Choisir --</option>
-              <option value="Paris 17">Paris 17e (Tocqueville)</option>
-              <option value="Paris (Autre)">Paris (Autre arrondissement)</option>
-              <option value="Levallois-Perret">Levallois-Perret</option>
-              <option value="Clichy">Clichy</option>
-              <option value="Neuilly-sur-Seine">Neuilly-sur-Seine</option>
-              <option value="Asnières-sur-Seine">Asnières-sur-Seine</option>
-              <option value="Courbevoie">Courbevoie</option>
-              <option value="Saint-Ouen">Saint-Ouen</option>
-              <option value="Puteaux">Puteaux</option>
-              <option value="Colombes">Colombes</option>
-              <option value="La Garenne-Colombes">La Garenne-Colombes</option>
-              <option value="Bois-Colombes">Bois-Colombes</option>
-              <option value="Gennevilliers">Gennevilliers</option>
-              <option value="Nanterre">Nanterre</option>
+              <optgroup label="Paris">
+                <option value="Paris 1">Paris 1er</option>
+                <option value="Paris 2">Paris 2e</option>
+                <option value="Paris 3">Paris 3e</option>
+                <option value="Paris 4">Paris 4e</option>
+                <option value="Paris 5">Paris 5e</option>
+                <option value="Paris 6">Paris 6e</option>
+                <option value="Paris 7">Paris 7e</option>
+                <option value="Paris 8">Paris 8e</option>
+                <option value="Paris 9">Paris 9e</option>
+                <option value="Paris 10">Paris 10e</option>
+                <option value="Paris 11">Paris 11e</option>
+                <option value="Paris 12">Paris 12e</option>
+                <option value="Paris 13">Paris 13e</option>
+                <option value="Paris 14">Paris 14e</option>
+                <option value="Paris 15">Paris 15e</option>
+                <option value="Paris 16">Paris 16e</option>
+                <option value="Paris 17">Paris 17e</option>
+                <option value="Paris 18">Paris 18e</option>
+                <option value="Paris 19">Paris 19e</option>
+                <option value="Paris 20">Paris 20e</option>
+              </optgroup>
+              <optgroup label="Proche Banlieue">
+                <option value="Levallois-Perret">Levallois-Perret</option>
+                <option value="Clichy">Clichy</option>
+                <option value="Neuilly-sur-Seine">Neuilly-sur-Seine</option>
+                <option value="Asnières-sur-Seine">Asnières-sur-Seine</option>
+                <option value="Courbevoie">Courbevoie</option>
+                <option value="Saint-Ouen">Saint-Ouen</option>
+                <option value="Puteaux">Puteaux</option>
+                <option value="Colombes">Colombes</option>
+                <option value="La Garenne-Colombes">La Garenne-Colombes</option>
+                <option value="Bois-Colombes">Bois-Colombes</option>
+                <option value="Gennevilliers">Gennevilliers</option>
+                <option value="Nanterre">Nanterre</option>
+              </optgroup>
             </select>
           </div>
         </div>
