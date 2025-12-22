@@ -131,10 +131,31 @@
       <div id="zone-livraison-details">
         <label>Adresse de livraison (Rue)</label>
         <input type="text" name="rue_livraison" placeholder="N° et nom de la rue">
+        
         <div class="ligne-adresse">
           <div><label>Code Postal</label><input type="text" name="cp_livraison"></div>
-          <div><label>Ville</label><input type="text" name="ville_livraison"></div>
+          <div>
+            <label>Ville</label>
+            <select name="ville_livraison">
+              <option value="" disabled selected>-- Choisir --</option>
+              <option value="Paris 17">Paris 17e (Tocqueville)</option>
+              <option value="Paris (Autre)">Paris (Autre arrondissement)</option>
+              <option value="Levallois-Perret">Levallois-Perret</option>
+              <option value="Clichy">Clichy</option>
+              <option value="Neuilly-sur-Seine">Neuilly-sur-Seine</option>
+              <option value="Asnières-sur-Seine">Asnières-sur-Seine</option>
+              <option value="Courbevoie">Courbevoie</option>
+              <option value="Saint-Ouen">Saint-Ouen</option>
+              <option value="Puteaux">Puteaux</option>
+              <option value="Colombes">Colombes</option>
+              <option value="La Garenne-Colombes">La Garenne-Colombes</option>
+              <option value="Bois-Colombes">Bois-Colombes</option>
+              <option value="Gennevilliers">Gennevilliers</option>
+              <option value="Nanterre">Nanterre</option>
+            </select>
+          </div>
         </div>
+
         <label>Heure de livraison souhaitée</label>
         <input type="time" name="heure_livraison">
       </div>
