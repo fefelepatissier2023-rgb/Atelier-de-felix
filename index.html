@@ -2,27 +2,47 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>L’Atelier de Félix - Commande</title>
+  <title>L’Atelier de Félix</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="favicon.png">
+
   <style>
-    /* On garde ton magnifique style rose et marron */
     body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #fff5f7; color: #5d4037; display: flex; flex-direction: column; align-items: center; padding: 20px; }
     .conteneur-patisserie { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 30px; }
     .carte-photo { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 4px solid #f8bbd0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
     .carte-photo img { width: 100%; height: 100%; object-fit: cover; }
+    
     .logo-img { max-width: 150px; height: auto; mix-blend-mode: multiply; margin-bottom: 15px; }
+
     .container-formulaire { background: white; padding: 25px; border-radius: 20px; width: 100%; max-width: 450px; border: 1px solid #f8bbd0; box-shadow: 0 10px 25px rgba(248, 187, 208, 0.4); }
     h1 { text-align: center; color: #ad1457; margin-bottom: 10px; font-size: 24px; }
     .note-paiement { background-color: #fce4ec; padding: 10px; border-radius: 8px; font-size: 13px; text-align: center; margin-bottom: 20px; border-left: 4px solid #ad1457; }
+    
     label { display: block; margin-top: 15px; font-weight: bold; color: #ad1457; font-size: 14px; }
     input, textarea, select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; margin-top: 5px; font-family: inherit; font-size: 14px; }
+    
     .ligne-adresse { display: flex; gap: 10px; }
     .ligne-adresse div { flex: 1; }
-    #zone-signature, #zone-autre, #zone-livraison-details, #zone-autre-parts { display: none; background: #fffbf0; padding: 15px; border-radius: 10px; margin-top: 15px; border: 1px dashed #ad1457; }
+
+    #zone-signature, #zone-autre, #zone-livraison-details, #zone-autre-parts { 
+      display: none; 
+      background: #fffbf0; 
+      padding: 15px; 
+      border-radius: 10px; 
+      margin-top: 15px; 
+      border: 1px dashed #ad1457;
+    }
+
+    .description-signature { font-size: 13px; color: #5d4037; line-height: 1.5; margin-bottom: 15px; background: white; padding: 10px; border-radius: 5px; border: 1px solid #fce4ec; }
+    .titre-signature { color: #ad1457; font-weight: bold; display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 12px; }
+
     .checkbox-container { background: #f9f9f9; padding: 15px; border-radius: 10px; margin-top: 20px; border: 1px solid #eee; display: flex; align-items: center; gap: 10px; }
+    .checkbox-container input { width: 20px; height: 20px; margin: 0; cursor: pointer; }
+
     .rappel-prix { font-size: 12px; color: #ad1457; text-align: center; margin-top: 15px; font-style: italic; font-weight: bold; }
+
     button { width: 100%; padding: 15px; background: #ad1457; color: white; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; margin-top: 10px; font-size: 16px; transition: 0.3s; }
-    button:disabled { background: #ccc; }
+    button:hover { background: #880e4f; }
   </style>
 </head>
 <body>
@@ -37,19 +57,19 @@
 
   <div class="container-formulaire">
     <h1>COMMANDE</h1>
-    <p class="note-paiement">🍰 <strong>On goûte d'abord, on paie après !</strong></p>
+    <p class="note-paiement">🍰 <strong>Concept unique : On goûte d'abord, on paie après !</strong></p>
 
-    <form id="orderForm">
+    <form action="https://formspree.io/f/mjgbrnlz" method="POST">
       <label>Nom & Prénom</label>
-      <input type="text" id="nom" required>
+      <input type="text" name="nom" required>
 
       <div class="ligne-adresse">
-        <div><label>Email</label><input type="email" id="email" required></div>
-        <div><label>Téléphone</label><input type="tel" id="tel" required></div>
+        <div><label>Email</label><input type="email" name="email" required></div>
+        <div><label>Téléphone</label><input type="tel" name="tel" required></div>
       </div>
 
       <label>Sélectionnez votre pâtisserie</label>
-      <select id="gateau" onchange="verifierChoix()" required>
+      <select name="gateau" id="choixGateau" onchange="verifierChoix()" required>
         <option value="" disabled selected>-- Faites votre choix --</option>
         <option value="Paris-Brest">Paris-Brest</option>
         <option value="Tiramisu">Tiramisu</option>
@@ -57,12 +77,28 @@
         <option value="Tropezienne">Tropézienne</option>
         <option value="Tarte au citron meringuée">Tarte au citron meringuée</option>
         <option value="Fraisier">Fraisier</option>
-        <option value="Signature">✨ LE SIGNATURE</option>
+        <option value="Signature">✨ LE SIGNATURE (Personnalisable)</option>
         <option value="Autre">Autre gâteau...</option>
       </select>
 
+      <div id="zone-signature">
+        <span class="titre-signature">La création Signature :</span>
+        <p class="description-signature">
+          Une pâtisserie unique <strong>en forme de tarte</strong> : une base de meringue craquante, une crème onctueuse, un biscuit moelleux et une chantilly pochée en fleur. Le tout est couronné d'une boule de chocolat surprise au <strong>cœur fondant</strong>.
+        </p>
+        <label>Goût de la crème</label>
+        <input type="text" name="signature_creme" placeholder="Ex: Vanille, Pistache...">
+        <label>Goût du cœur fondant (boule chocolat)</label>
+        <input type="text" name="signature_coeur" placeholder="Ex: Caramel, Framboise...">
+      </div>
+
+      <div id="zone-autre">
+        <label>Quel gâteau désirez-vous ?</label>
+        <input type="text" name="autre_gateau_nom">
+      </div>
+
       <label>Nombre de parts</label>
-      <select id="nombre_parts" onchange="verifierParts()" required>
+      <select name="nombre_parts" id="choixParts" onchange="verifierParts()" required>
         <option value="2">2 parts</option>
         <option value="3">3 parts</option>
         <option value="4">4 parts</option>
@@ -72,95 +108,96 @@
         <option value="8">8 parts</option>
         <option value="Autre">Autre nombre...</option>
       </select>
-
-      <div id="zone-autre-parts"><label>Précisez :</label><input type="number" id="precision_parts"></div>
-      <div id="zone-signature">
-        <label>Goût de la crème</label><input type="text" id="signature_gout_1">
-        <label>Goût du cœur fondant</label><input type="text" id="signature_gout_2">
+      <div id="zone-autre-parts">
+        <label>Précisez le nombre de parts :</label>
+        <input type="number" name="precision_parts" placeholder="Ex: 12">
       </div>
-      <div id="zone-autre"><label>Quel gâteau ?</label><input type="text" id="autre_gateau_nom"></div>
 
       <label>Date souhaitée</label>
-      <input type="date" id="date" required>
-      <label>Précisions</label>
-      <textarea id="message" rows="2"></textarea>
+      <input type="date" name="date" required>
+
+      <label>Précisions (Anniversaire, allergies...)</label>
+      <textarea name="message" rows="2"></textarea>
 
       <div class="checkbox-container">
-        <input type="checkbox" id="livraison" onchange="verifierLivraison()">
-        <label for="livraison">🚗 Je souhaite être livré à domicile</label>
+        <input type="checkbox" id="livraison" name="demande_livraison" value="Oui" onchange="verifierLivraison()">
+        <label for="livraison" style="margin:0; cursor:pointer;">🚗 Je souhaite être livré à domicile</label>
       </div>
 
       <div id="zone-livraison-details">
-        <label>Adresse (Rue)</label><input type="text" id="rue_livraison">
-        <label>Appartement / Précisions</label><input type="text" id="appartement_details">
+        <label>Adresse de livraison (Rue)</label>
+        <input type="text" name="rue_livraison" placeholder="N° et nom de la rue">
+        
+        <label>Appartement / Précisions</label>
+        <input type="text" name="appartement_details" placeholder="Bâtiment B, fond de la cour à droite, code...">
+
         <div class="ligne-adresse">
-          <div><label>Étage</label><input type="text" id="etage"></div>
-          <div><label>CP</label><input type="text" id="cp_livraison"></div>
+          <div><label>Étage</label><input type="text" name="etage" placeholder="Ex: 4ème"></div>
+          <div><label>Code Postal</label><input type="text" name="cp_livraison" placeholder="750XX"></div>
         </div>
-        <label>Heure souhaitée</label><input type="time" id="heure_livraison">
+
+        <label>Ville / Arrondissement</label>
+        <select name="ville_livraison">
+          <option value="" disabled selected>-- Choisir --</option>
+          <optgroup label="Paris">
+            <option value="Paris 1">Paris 1er</option>
+            <option value="Paris 2">Paris 2e</option>
+            <option value="Paris 3">Paris 3e</option>
+            <option value="Paris 4">Paris 4e</option>
+            <option value="Paris 5">Paris 5e</option>
+            <option value="Paris 6">Paris 6e</option>
+            <option value="Paris 7">Paris 7e</option>
+            <option value="Paris 8">Paris 8e</option>
+            <option value="Paris 9">Paris 9e</option>
+            <option value="Paris 10">Paris 10e</option>
+            <option value="Paris 11">Paris 11e</option>
+            <option value="Paris 12">Paris 12e</option>
+            <option value="Paris 13">Paris 13e</option>
+            <option value="Paris 14">Paris 14e</option>
+            <option value="Paris 15">Paris 15e</option>
+            <option value="Paris 16">Paris 16e</option>
+            <option value="Paris 17">Paris 17e</option>
+            <option value="Paris 18">Paris 18e</option>
+            <option value="Paris 19">Paris 19e</option>
+            <option value="Paris 20">Paris 20e</option>
+          </optgroup>
+          <optgroup label="Proche Banlieue">
+            <option value="Levallois-Perret">Levallois-Perret</option>
+            <option value="Clichy">Clichy</option>
+            <option value="Neuilly-sur-Seine">Neuilly-sur-Seine</option>
+            <option value="Asnières-sur-Seine">Asnières-sur-Seine</option>
+            <option value="Courbevoie">Courbevoie</option>
+            <option value="Saint-Ouen">Saint-Ouen</option>
+            <option value="Puteaux">Puteaux</option>
+          </optgroup>
+        </select>
+
+        <label>Heure de livraison souhaitée</label>
+        <input type="time" name="heure_livraison">
       </div>
 
-      <p class="rappel-prix">Le prix sera décidé après dégustation. ✅</p>
-      <button type="submit" id="submitBtn">Valider ma commande 🍰</button>
+      <p class="rappel-prix">Le prix sera fixé après réception et dégustation. ✅</p>
+      <button type="submit">Valider ma commande 🍰</button>
     </form>
   </div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+  <script>
+    function verifierChoix() {
+      var selection = document.getElementById("choixGateau").value;
+      document.getElementById("zone-signature").style.display = (selection === "Signature") ? "block" : "none";
+      document.getElementById("zone-autre").style.display = (selection === "Autre") ? "block" : "none";
+    }
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyBwMCXfgxkb6Bp50Co0Qn5_ANDG1RCfgLU",
-      authDomain: "l-atelier-de-felix.firebaseapp.com",
-      projectId: "l-atelier-de-felix",
-      storageBucket: "l-atelier-de-felix.firebasestorage.app",
-      messagingSenderId: "667382759870",
-      appId: "1:667382759870:web:f5775b881ba8bbe456b9ef"
-    };
+    function verifierParts() {
+      var selectionParts = document.getElementById("choixParts").value;
+      document.getElementById("zone-autre-parts").style.display = (selectionParts === "Autre") ? "block" : "none";
+    }
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    window.verifierChoix = () => {
-      const val = document.getElementById("gateau").value;
-      document.getElementById("zone-signature").style.display = (val === "Signature") ? "block" : "none";
-      document.getElementById("zone-autre").style.display = (val === "Autre") ? "block" : "none";
-    };
-
-    window.verifierParts = () => {
-      document.getElementById("zone-autre-parts").style.display = (document.getElementById("nombre_parts").value === "Autre") ? "block" : "none";
-    };
-
-    window.verifierLivraison = () => {
-      document.getElementById("zone-livraison-details").style.display = document.getElementById("livraison").checked ? "block" : "none";
-    };
-
-    document.getElementById("orderForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById("submitBtn");
-      btn.disabled = true;
-      btn.innerText = "Envoi en cours...";
-
-      try {
-        await addDoc(collection(db, "commandes"), {
-          client: document.getElementById("nom").value,
-          email: document.getElementById("email").value,
-          tel: document.getElementById("tel").value,
-          gateau: document.getElementById("gateau").value,
-          parts: document.getElementById("nombre_parts").value,
-          date: document.getElementById("date").value,
-          livraison: document.getElementById("livraison").checked,
-          adresse: document.getElementById("rue_livraison").value,
-          timestamp: serverTimestamp()
-        });
-        alert("Commande envoyée ! Félix vous recontactera bientôt. 🍰");
-        document.getElementById("orderForm").reset();
-      } catch (e) {
-        alert("Erreur : " + e.message);
-      }
-      btn.disabled = false;
-      btn.innerText = "Valider ma commande 🍰";
-    });
+    function verifierLivraison() {
+      var isChecked = document.getElementById("livraison").checked;
+      document.getElementById("zone-livraison-details").style.display = isChecked ? "block" : "none";
+    }
   </script>
+
 </body>
 </html>
